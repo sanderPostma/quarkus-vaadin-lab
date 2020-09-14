@@ -48,7 +48,7 @@ public class CdiInstantiator implements Instantiator {
   public <T> T getOrCreate(Class<T> type) {
     return new BeanLookup<>(beanManager, type)
         .setUnsatisfiedHandler(() -> getLogger().info(
-            "'{}' is not a CDI bean. "
+            "'" + type.getName() + "' is not a CDI bean. "
                 + FALLING_BACK_TO_DEFAULT_INSTANTIATION))
         .setAmbiguousHandler(
             e -> getLogger().info(

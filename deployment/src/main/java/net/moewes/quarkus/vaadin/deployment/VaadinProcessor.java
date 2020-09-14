@@ -2,7 +2,9 @@ package net.moewes.quarkus.vaadin.deployment;
 
 import static io.quarkus.deployment.annotations.ExecutionTime.STATIC_INIT;
 
+import com.vaadin.flow.internal.BrowserLiveReloadAccess;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.Lumo;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanArchiveIndexBuildItem;
 import io.quarkus.arc.deployment.BeanContainerBuildItem;
@@ -40,7 +42,7 @@ public class VaadinProcessor {
 
   @BuildStep
   AdditionalBeanBuildItem beans() {
-    return new AdditionalBeanBuildItem(RegisteredRoutesBean.class, QuarkusVaadinServlet.class);
+    return new AdditionalBeanBuildItem(RegisteredRoutesBean.class, QuarkusVaadinServlet.class, BrowserLiveReloadAccess.class, Lumo.class);
   }
 
   @BuildStep

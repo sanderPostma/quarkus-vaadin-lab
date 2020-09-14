@@ -55,7 +55,7 @@ Ensure that $GRAALVM_HOME is set.
  Component | Dev Mode | VM Mode | Native Mode |
  -------- | --------- | --------- | --------- |
  Accordion | works | works | works |
- AppLayout | works | works | fails |
+ AppLayout | works | works | works |
  Button | works | works | works |
  [Check box](https://vaadin.com/components/vaadin-checkbox) | works | works | works
  Detail | works | works | works |
