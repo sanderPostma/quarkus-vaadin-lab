@@ -37,12 +37,10 @@ public class CdiInstantiator implements Instantiator {
     private DefaultInstantiator delegate;
     @Inject
     private BeanManager beanManager;
-/*
 
   public CdiInstantiator() {
     getLogger().info("CdiInstantiator created");
   }
-*/
 
     @Override
     public boolean init(VaadinService service) {

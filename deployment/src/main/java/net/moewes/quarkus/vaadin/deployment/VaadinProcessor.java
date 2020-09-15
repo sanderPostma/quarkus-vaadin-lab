@@ -6,12 +6,14 @@ import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanArchiveIndexBuildItem;
 import io.quarkus.arc.deployment.BeanContainerBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
+import io.quarkus.arc.deployment.UnremovableBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.undertow.deployment.ServletBuildItem;
+import net.moewes.quarkus.vaadin.CdiInstantiator;
 import net.moewes.quarkus.vaadin.QuarkusVaadinServlet;
 import net.moewes.quarkus.vaadin.RegisteredRoutesBean;
 import net.moewes.quarkus.vaadin.VaadinRecorder;
@@ -45,25 +47,25 @@ public class VaadinProcessor {
         return new AdditionalBeanBuildItem(RegisteredRoutesBean.class, QuarkusVaadinServlet.class, Lumo.class);
     }
 
-/*
-
     @BuildStep
     UnremovableBeanBuildItem unremovableBeans() {
         // Make all classes annotated with @Startup unremovable
         return UnremovableBeanBuildItem.beanTypes(QuarkusVaadinServlet.class, CdiInstantiator.class, RegisteredRoutesBean.class);
     }
-*/
 
     @BuildStep
     ServletBuildItem vaadinServlet() {
-        log.info("Add QuarkusVaadinServlet");
-        return ServletBuildItem.builder("QuarkusVaadinServlet", QuarkusVaadinServlet.class.getName())
+        ServletBuildItem quarkusVaadinServlet = ServletBuildItem.builder("QuarkusVaadinServlet", QuarkusVaadinServlet.class.getName())
                 .addMapping("/vaadin/*")
                 .addMapping("/frontend/*")
-/*
                 .addMapping("/*")
-*/
                 .build();
+        StringBuilder builder = new StringBuilder().append("Add QuarkusVaadinServlet with routes ");
+        quarkusVaadinServlet.getMappings().forEach(s -> {
+            builder.append(s).append(", ");
+        });
+        log.info(builder.toString());
+        return quarkusVaadinServlet;
     }
 
     @BuildStep
