@@ -249,10 +249,6 @@
   "allDeclaredMethods":true
 },
 {
-  "name":"com.vaadin.flow.internal.BrowserLiveReloadAccess",
-  "allPublicConstructors":true
-},
-{
   "name":"com.vaadin.flow.router.AfterNavigationObserver",
   "allDeclaredMethods":true
 },

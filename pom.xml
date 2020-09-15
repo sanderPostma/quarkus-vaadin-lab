@@ -41,7 +41,7 @@
   <modules>
     <module>runtime</module>
     <module>deployment</module>
-    <module>example</module>
+    <!--<module>example</module>-->
   </modules>
 
 </project>
